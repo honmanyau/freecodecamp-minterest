@@ -7,6 +7,6 @@ const config = {
   projectId: "fcc-certificates",
 };
 
-export const twitterAuthProvider = new firebase.auth.TwitterAuthProvider();
+export const authProviderTwitter = new firebase.auth.TwitterAuthProvider();
 
 export default firebase.initializeApp(config);

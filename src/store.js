@@ -1,16 +1,19 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-function temp(state = 0, action) {
-  switch(action.type) {
-    case 'TEMP':
-      return Object.assign({}, state, action.payload.num)
+import reducer from './reducers';
+import { authListener, authProviderRedirectListener } from './actions/auth';
 
-    default:
-      return state;
-  }
-}
 
-const store = createStore(temp, applyMiddleware(thunk));
+
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk)
+);
+
+store.dispatch(authListener());
+store.dispatch(authProviderRedirectListener());
+
+console.log('STORE', store.getState());
 
 export default store;
