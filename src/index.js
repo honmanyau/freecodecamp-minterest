@@ -1,8 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { MuiThemeProvider } from 'material-ui/styles';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import store from './store';
+
+import Auth from './components/Auth';
+import Main from './components/Main';
+
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <BrowserRouter>
+        <div>
+          <Auth />
+          
+          <Route exact path="/" component={Main} />
+        </div>
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </Provider>,
+  document.getElementById('root')
+);
