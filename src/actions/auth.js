@@ -15,7 +15,12 @@ export function authListener() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(storeAuthedUser(user));
-        localStorage.setItem(LOCALSTORAGEKEY, {user: user.uid});
+        localStorage.setItem(LOCALSTORAGEKEY, JSON.stringify({
+          user: {
+            uid: user.uid,
+            displayName: user.displayName
+          }
+        }));
       }
       else {
         dispatch(storeAuthedUser(null));

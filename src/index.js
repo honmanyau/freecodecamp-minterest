@@ -9,6 +9,7 @@ import store from './store';
 
 import Auth from './components/Auth';
 import Main from './components/Main';
+import Dashboard from './components/Dashboard';
 
 
 
@@ -16,17 +17,29 @@ const muiTheme = getMuiTheme({
   appBar: {
     color: '#fff',
     textColor: '#000'
+  },
+  "floatingActionButton": {
+      color: '#fff',
+      iconColor: '#999'
   }
 });
+
+const styles = {
+  container: {
+    maxWidth: '1000px',
+    margin: 'auto'
+  }
+};
 
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <BrowserRouter>
-        <div>
+        <div style={styles.container}>
           <Auth />
 
           <Route exact path="/" component={Main} />
+          <Route path="/dashboard" component={Dashboard} />
         </div>
       </BrowserRouter>
     </MuiThemeProvider>

@@ -58,7 +58,7 @@ class Auth extends React.Component {
       <FlatButton
         disabled={auth.inProgress ? true : false}
         style={styles.buttonStyle}
-        label={auth.inProgress ? '｡◕‿◕｡✿' : (localAuth ? 'Sign out' : 'Sign in')}
+        label={auth.inProgress ? '｡◕‿◕｡✿' : (localAuth ? 'Sign out' : <span><i className="fa fa-twitter" aria-hidden="true"></i> Sign in</span>)}
         onClick={() => this.handleAuthButtonClick(localAuth)}
       />;
 
