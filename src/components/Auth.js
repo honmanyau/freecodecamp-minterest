@@ -80,6 +80,7 @@ class Auth extends React.Component {
           onRequestChange={(drawerOpened) => this.setState({drawerOpened})}
         >
           <MenuItem onClick={() => this.props.history.push('/')}>Home</MenuItem>
+          <MenuItem onClick={() => this.props.history.push('/dashboard')}>Dashboard</MenuItem>
           <MenuItem onClick={() => window.open(GITHUBREPOURL)}>GitHub Repository</MenuItem>
         </Drawer>
       </div>
