@@ -84,7 +84,8 @@ class NewMinDialogue extends React.Component {
         {newMinButton}
 
         <Dialog
-          modal={true}
+          modal
+          repositionOnUpdate
           title="Create a Min (ﾉ≧∀≦)ﾉ:｡･:*:･ﾟ’★,｡･:*:･ﾟ’☆"
           open={this.state.dialogueOpened}
           actions={actions}
