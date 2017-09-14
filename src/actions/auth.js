@@ -27,13 +27,8 @@ export function authListener() {
           }
         }));
 
-        if (pathname === '/dashboard') {
-          dispatch(fetchDashboardMins(user.uid));
-        }
-
-        if (pathname === '/') {
-          dispatch(fetchPublicMins());
-        }
+        dispatch(fetchDashboardMins(user.uid));
+        dispatch(fetchPublicMins());
       }
       else {
         dispatch(storeAuthedUser(null));
