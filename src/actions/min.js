@@ -21,7 +21,7 @@ export function addMin(uid, min) {
   }
 }
 
-export function fetchDashboardMins() {
+export function fetchDashboardMins(uid) {
   return function(dispatch) {
     dispatch(fetchingMins(true));
 

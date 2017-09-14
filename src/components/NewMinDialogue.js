@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Kaomoji from '../images/kaomoji.png';
+import * as MinActions from '../actions/min';
 
 import { Card, CardMedia, CardText } from 'material-ui/Card';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -8,6 +10,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import Kaomoji from '../images/kaomoji.png';
 
 
 
@@ -46,6 +49,15 @@ class NewMinDialogue extends React.Component {
     this.setState({dialogueOpened: !this.state.dialogueOpened});
   }
 
+  handleModalSubmit() {
+    this.props.actions.addMin(this.props.auth.user.uid, {
+      imageUrl: this.state.imageSrc,
+      caption: this.state.caption,
+      description: this.state.description
+    })
+    this.closeModalWindow()
+  }
+
   closeModalWindow() {
     this.setState({dialogueOpened: false});
   }
@@ -75,7 +87,7 @@ class NewMinDialogue extends React.Component {
           !this.state.description.length ||
           this.state.imageLoading
         }
-        onClick={() => this.closeModalWindow()}
+        onClick={() => this.handleModalSubmit()}
       />,
     ];
 
@@ -148,4 +160,17 @@ class NewMinDialogue extends React.Component {
   }
 }
 
-export default NewMinDialogue;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    min: state.min
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(MinActions, dispatch)
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewMinDialogue);
