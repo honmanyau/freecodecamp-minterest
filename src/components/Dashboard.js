@@ -7,7 +7,7 @@ import * as MinActions from '../actions/min';
 import { Card, CardText } from 'material-ui/Card';
 
 import NewMinDialogue from './NewMinDialogue';
-
+import Min from './Min';
 
 
 const styles = {
@@ -21,12 +21,19 @@ const styles = {
 
 class Dashboard extends React.Component {
   render() {
+    const min = this.props.min;
+    let mins = null;
+
+    if (!min.fetchingMins && min.dashboardMins) {
+      mins = Object.keys(min.dashboardMins).map((key) => <Min key={key} min={min.dashboardMins[key]} />);
+    }
+
     return(
       <Card style={styles.card}>
         <CardText>
           Dashboard ( ´ ▽ ` )ﾉ
         </CardText>
-
+          {mins}
         <NewMinDialogue />
       </Card>
     )

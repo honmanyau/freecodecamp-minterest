@@ -5,13 +5,15 @@ import firebase from '../firebase';
 export const FETCHING_MINS = 'FETCHING_MINS';
 export const STORE_DASHBOARD_MINS = 'STORE_DASHBOARD_MINS';
 
-export function addMin(uid, min) {
+export function addMin(user, min) {
   return function(dispatch) {
     // This would normally be handled server-side (or using Cloud Functions in this case)
     // so that links and views can't be modified by the user—but, in favour of avoiding the
     // cold-start time of Cloud Functions for the demo, this is done client-side to take
     // advantage of the speed of the real-time database.
-    firebase.database().ref(`/minterest/users/${uid}/mins`).push(Object.assign({}, min, {
+    firebase.database().ref(`/minterest/users/${user.uid}/mins`).push(Object.assign({}, min, {
+      author: user.displayName,
+      uid: user.uid,
       likes: 0,
       views: 0
     }))

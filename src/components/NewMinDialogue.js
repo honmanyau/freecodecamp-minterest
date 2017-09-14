@@ -50,7 +50,7 @@ class NewMinDialogue extends React.Component {
   }
 
   handleModalSubmit() {
-    this.props.actions.addMin(this.props.auth.user.uid, {
+    this.props.actions.addMin(this.props.auth.user, {
       imageUrl: this.state.imageSrc,
       caption: this.state.caption,
       description: this.state.description
