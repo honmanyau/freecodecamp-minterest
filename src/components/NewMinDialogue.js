@@ -16,7 +16,7 @@ import Kaomoji from '../images/kaomoji.png';
 
 const styles = {
   newMinButton: {
-    margin: '62px'
+    margin: '20px 70px'
   },
   container: {
     display: 'flex',

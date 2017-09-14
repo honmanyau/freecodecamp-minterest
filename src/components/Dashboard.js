@@ -14,8 +14,12 @@ const styles = {
   card: {
     boxShadow: 'none'
   },
-  newMinButton: {
-    margin: '62px'
+  minsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
+    flexWrap: 'wrap'
   }
 };
 
@@ -33,8 +37,10 @@ class Dashboard extends React.Component {
         <CardText>
           Dashboard ( ´ ▽ ` )ﾉ
         </CardText>
+        <CardText style={styles.minsContainer}>
+          <NewMinDialogue width='212' />
           {mins}
-        <NewMinDialogue />
+        </CardText>
       </Card>
     )
   }

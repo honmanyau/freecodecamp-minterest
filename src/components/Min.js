@@ -18,7 +18,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '16px',
+    margin: '8px',
     width: '212px'
   },
   image: {
@@ -112,12 +112,18 @@ class Min extends React.Component {
             onClick={() => window.open(`https://twitter.com/intent/tweet?text=${min.description}%20(${ROOTURL})`)}
           />
 
-          <IconButton
-            disabled={localAuth ? (localAuth.user.uid === min.uid ? true : false) : false}
-            style={{...styles.iconButton, margin: '0 12px'}}
-            iconStyle={styles.icon}
-            iconClassName="fa fa-heart-o"
-          />
+          {
+            localAuth ?
+              (
+                <IconButton
+                  disabled={localAuth ? (localAuth.user.uid === min.uid ? true : false) : false}
+                  style={{...styles.iconButton, margin: '0 12px'}}
+                  iconStyle={styles.icon}
+                  iconClassName="fa fa-heart-o"
+                />
+              ) :
+              null
+          }
 
           <IconButton
             style={{...styles.iconButton, float: 'right'}}
