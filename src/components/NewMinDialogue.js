@@ -28,21 +28,23 @@ const styles = {
   }
 }
 
+const initialState = {
+  dialogueOpened: false,
+  caption: '',
+  captionError: null,
+  imageUrl: '',
+  imageSrc: '',
+  imageUrlError: null,
+  description: '',
+  descriptionError: null,
+  imageLoading: false
+};
+
 class NewMinDialogue extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dialogueOpened: false,
-      caption: '',
-      captionError: null,
-      imageUrl: '',
-      imageSrc: '',
-      imageUrlError: null,
-      description: '',
-      descriptionError: null,
-      imageLoading: false
-    };
+    this.state = initialState;
   }
 
   handleNewMinButtonClick() {
@@ -56,6 +58,9 @@ class NewMinDialogue extends React.Component {
       description: this.state.description
     })
     this.closeModalWindow()
+    this.setState({
+
+    });
   }
 
   closeModalWindow() {
