@@ -17,8 +17,6 @@ const styles = {
   minsContainer: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    alignContent: 'flex-start',
     flexWrap: 'wrap'
   }
 };

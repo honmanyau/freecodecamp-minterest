@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as MinActions from '../actions/min';
-import { ROOTURL, LOCALSTORAGEKEY } from '../common';
+import { ROOTURL, LOCALSTORAGEKEY, COLWIDTH } from '../common';
 
 import { pink300 } from 'material-ui/styles/colors';
 import { Card, CardActions, CardMedia, CardText } from 'material-ui/Card';
@@ -12,7 +12,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Kaomoji from '../images/kaomoji.png';
 
 
-
+const margin = 16;
 
 const styles = {
   container: {
@@ -20,11 +20,11 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     margin: '8px',
-    width: '212px'
+    width: COLWIDTH + 'px'
   },
   image: {
-    margin: '16px 16px 0px 16px',
-    width: '180px'
+    margin: [margin, margin, 0, margin].join("px ") + "px",
+    width: (COLWIDTH - margin * 2) + 'px'
   },
   overlay: {
     padding: '10px',
