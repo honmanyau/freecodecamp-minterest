@@ -4,6 +4,21 @@ import firebase from '../firebase';
 
 export const FETCHING_MINS = 'FETCHING_MINS';
 export const STORE_DASHBOARD_MINS = 'STORE_DASHBOARD_MINS';
+export const STORE_PUBLIC_MINS = 'STORE_PUBLIC_MINS';
+
+export function fetchPublicMins() {
+  return function(dispatch) {
+    dispatch(fetchingMins(true));
+
+    firebase.database().ref(`/minterest/public/mins`).on('value', (snapshot) => {
+      dispatch(storePublicMins(snapshot.val()));
+      dispatch(fetchingMins(false));
+    }, (error) => {
+      dispatch(fetchingMins(false));
+      console.log('Error occured when dispatching dashboard min listener.')
+    });
+  }
+}
 
 export function fetchDashboardMins(uid) {
   return function(dispatch) {
@@ -63,6 +78,15 @@ export function storeDashboardMins(dashboardMins) {
     type: STORE_DASHBOARD_MINS,
     payload: {
       dashboardMins
+    }
+  }
+}
+
+export function storePublicMins(publicMins) {
+  return {
+    type: STORE_PUBLIC_MINS,
+    payload: {
+      publicMins
     }
   }
 }

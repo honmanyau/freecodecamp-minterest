@@ -1,7 +1,7 @@
 import firebase, { authProviderTwitter } from '../firebase';
 import { LOCALSTORAGEKEY } from '../common';
 
-import { fetchDashboardMins } from './min';
+import { fetchDashboardMins, fetchPublicMins } from './min';
 
 
 
@@ -27,8 +27,12 @@ export function authListener() {
           }
         }));
 
-        if (pathname === '/dashboard' || pathname === '/') {
+        if (pathname === '/dashboard') {
           dispatch(fetchDashboardMins(user.uid));
+        }
+
+        if (pathname === '/') {
+          dispatch(fetchPublicMins());
         }
       }
       else {

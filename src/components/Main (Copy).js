@@ -6,10 +6,10 @@ import Mins from './Mins';
 
 
 
-class Dashboard extends React.Component {
+class Main extends React.Component {
   render() {
     return(
-      <Mins data={this.props.min.dashboardMins} />
+      <Mins data={this.props.min} />
     )
   }
 }
@@ -20,4 +20,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, null)(Main);

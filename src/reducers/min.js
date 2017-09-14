@@ -1,6 +1,7 @@
 import {
   FETCHING_MINS,
-  STORE_DASHBOARD_MINS
+  STORE_DASHBOARD_MINS,
+  STORE_PUBLIC_MINS
 } from '../actions/min';
 
 
@@ -20,6 +21,11 @@ export default function min(state = initialState, action) {
       case STORE_DASHBOARD_MINS:
         return Object.assign({}, state, {
           dashboardMins: action.payload.dashboardMins
+        });
+
+      case STORE_PUBLIC_MINS:
+        return Object.assign({}, state, {
+          publicMins: action.payload.publicMins
         });
 
     default:
