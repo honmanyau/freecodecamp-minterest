@@ -1,7 +1,5 @@
 import firebase from '../firebase';
 
-import { ROOTURL } from '../common';
-
 
 
 export const FETCHING_MINS = 'FETCHING_MINS';

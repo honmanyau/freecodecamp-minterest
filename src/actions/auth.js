@@ -1,6 +1,8 @@
 import firebase, { authProviderTwitter } from '../firebase';
 import { LOCALSTORAGEKEY } from '../common';
 
+import { fetchDashboardMins } from './min';
+
 
 
 const localStorage = window.localStorage;
@@ -15,15 +17,21 @@ export function authListener() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(storeAuthedUser(user));
+
         localStorage.setItem(LOCALSTORAGEKEY, JSON.stringify({
           user: {
             uid: user.uid,
             displayName: user.displayName
           }
         }));
+
+        if (window.location.pathname === '/dashboard') {
+          dispatch(fetchDashboardMins(user.uid));
+        }
       }
       else {
         dispatch(storeAuthedUser(null));
+
         localStorage.removeItem(LOCALSTORAGEKEY);
       }
 
