@@ -136,15 +136,23 @@ class Min extends React.Component {
         <CardText style={styles.descriptionContainer} expandable>
           <div>{min.description}</div>
           <div style={styles.author}>Shared by {min.author}</div>
-          <br />
-          <br />
-          <div style={styles.deleteButtonContainer}>
-            <RaisedButton
-              secondary={this.state.confirmDelete}
-              label={this.state.deleteButtonLabel}
-              onClick={() => this.handleDeleteButton(min)}
-            />
-          </div>
+          {
+            localAuth ?
+            (
+              <div>
+                <br />
+                <br />
+                <div style={styles.deleteButtonContainer}>
+                  <RaisedButton
+                    secondary={this.state.confirmDelete}
+                    label={this.state.deleteButtonLabel}
+                    onClick={() => this.handleDeleteButton(min)}
+                  />
+                </div>
+              </div>
+            ) :
+            null
+          }
         </CardText>
       </Card>
     )

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { LOCALSTORAGEKEY } from '../common';
+
 import { Card, CardText } from 'material-ui/Card';
 
 import NewMinDialogue from './NewMinDialogue';
@@ -24,6 +26,7 @@ const styles = {
 class Mins extends React.Component {
   render() {
     const data = this.props.data;
+    const localAuth = JSON.parse(window.localStorage.getItem(LOCALSTORAGEKEY));
     let mins = null;
 
     if (!this.props.min.fetchingMins && data) {
@@ -37,7 +40,7 @@ class Mins extends React.Component {
         </CardText>
 
         <CardText style={styles.minsContainer}>
-          <NewMinDialogue />
+          {localAuth ? <NewMinDialogue /> : null}
           {mins}
         </CardText>
       </Card>
