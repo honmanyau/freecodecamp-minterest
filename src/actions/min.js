@@ -25,12 +25,19 @@ export function addMin(user, min) {
     // so that links and views can't be modified by the user—but, in favour of avoiding the
     // cold-start time of Cloud Functions for the demo, this is done client-side to take
     // advantage of the speed of the real-time database.
-    firebase.database().ref(`/minterest/users/${user.uid}/mins`).push(Object.assign({}, min, {
+    const key = firebase.database().ref(`/minterest/users/${user.uid}/mins`).push().getKey();
+    const newData = Object.assign({}, min, {
       author: user.displayName,
       uid: user.uid,
+      mid: key,
       likes: 0,
       views: 0
-    }))
+    });
+
+    firebase.database().ref().update({
+      [`/minterest/users/${user.uid}/mins/${key}`]: newData,
+      [`/minterest/public/mins/${key + user.uid}`]: newData
+    })
       .catch((error) => 'Error occured when creating a new min.')
   }
 }

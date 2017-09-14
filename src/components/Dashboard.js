@@ -37,8 +37,9 @@ class Dashboard extends React.Component {
         <CardText>
           Dashboard ( ´ ▽ ` )ﾉ
         </CardText>
+
         <CardText style={styles.minsContainer}>
-          <NewMinDialogue width='212' />
+          <NewMinDialogue />
           {mins}
         </CardText>
       </Card>

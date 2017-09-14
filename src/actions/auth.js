@@ -12,6 +12,8 @@ export const AUTH_IN_PROGRESS = 'AUTH_IN_PROGRESS';
 
 export function authListener() {
   return function(dispatch) {
+    const pathname = window.location.pathname;
+
     dispatch(authInProgress(true));
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -25,7 +27,7 @@ export function authListener() {
           }
         }));
 
-        if (window.location.pathname === '/dashboard') {
+        if (pathname === '/dashboard' || pathname === '/') {
           dispatch(fetchDashboardMins(user.uid));
         }
       }
