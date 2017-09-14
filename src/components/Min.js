@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as MinActions from '../actions/min';
-import { ROOTURL, LOCALSTORAGEKEY, COLWIDTH } from '../common';
+import { ROOTURL, LOCALSTORAGEKEY, COLWIDTH, COLMARGIN } from '../common';
 
 import { pink300 } from 'material-ui/styles/colors';
 import { Card, CardActions, CardMedia, CardText } from 'material-ui/Card';
@@ -19,7 +19,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '8px',
+    margin: COLMARGIN + 'px',
     width: COLWIDTH + 'px'
   },
   image: {

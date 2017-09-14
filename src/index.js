@@ -7,6 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import store from './store';
 
+import { MAXWIDTH } from '../src/common';
+
 import Auth from './components/Auth';
 import Main from './components/Main';
 import Dashboard from './components/Dashboard';
@@ -26,7 +28,7 @@ const muiTheme = getMuiTheme({
 
 const styles = {
   container: {
-    maxWidth: '1000px',
+    maxWidth: MAXWIDTH + 'px',
     margin: 'auto'
   }
 };
