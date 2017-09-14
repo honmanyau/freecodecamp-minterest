@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { LOCALSTORAGEKEY, COLWIDTH, COLMARGIN, MAXWIDTH } from '../common';
+import { COLWIDTH, COLMARGIN, MAXWIDTH } from '../common';
 
 import { Card, CardText, CardTitle } from 'material-ui/Card';
 
@@ -50,15 +49,12 @@ class Mins extends React.Component {
   render() {
     const data = this.props.data;
     const pathname = window.location.pathname;
-    const localAuth = JSON.parse(window.localStorage.getItem(LOCALSTORAGEKEY));
     const columns = this.state.columns;
     let mins = null;
 
     if (!this.props.min.fetchingMins && data) {
-      mins = Object.keys(data).map((key) => <Min key={key} min={{...data[key], key}} />);
+      mins = Object.keys(data).map((key) => <Min key={key} min={{...data[key], key}} />).reverse();
     }
-
-    console.log(columns);
 
     if (columns && mins) {
       let columnedMins = [];
@@ -76,7 +72,6 @@ class Mins extends React.Component {
             {pathname === '/dashboard' ? <CardTitle title='Dashboard ( ´ ▽ ` )ﾉ' /> : null}
 
           <CardText style={styles.minsContainer}>
-            {/* {window.location.pathname === '/dashboard' ? <NewMinDialogue /> : null} */}
             {columnedMins.map((col, index) => <div key={"column" + index}>{col}</div>)}
           </CardText>
         </Card>

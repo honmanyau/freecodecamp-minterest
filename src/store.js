@@ -14,6 +14,4 @@ const store = createStore(
 store.dispatch(authListener());
 store.dispatch(authProviderRedirectListener());
 
-console.log('STORE', store.getState());
-
 export default store;
