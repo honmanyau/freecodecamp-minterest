@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import * as MinActions from '../actions/min';
 import { ROOTURL, LOCALSTORAGEKEY } from '../common';
 
 import { Card, CardActions, CardMedia, CardText } from 'material-ui/Card';
@@ -142,4 +145,10 @@ class Min extends React.Component {
   }
 }
 
-export default Min;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(MinActions, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Min);

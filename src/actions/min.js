@@ -5,6 +5,20 @@ import firebase from '../firebase';
 export const FETCHING_MINS = 'FETCHING_MINS';
 export const STORE_DASHBOARD_MINS = 'STORE_DASHBOARD_MINS';
 
+export function fetchDashboardMins(uid) {
+  return function(dispatch) {
+    dispatch(fetchingMins(true));
+
+    firebase.database().ref(`/minterest/users/${uid}/mins`).on('value', (snapshot) => {
+      dispatch(storeDashboardMins(snapshot.val()));
+      dispatch(fetchingMins(false));
+    }, (error) => {
+      dispatch(fetchingMins(false));
+      console.log('Error occured when dispatching dashboard min listener.')
+    });
+  }
+}
+
 export function addMin(user, min) {
   return function(dispatch) {
     // This would normally be handled server-side (or using Cloud Functions in this case)
@@ -21,17 +35,10 @@ export function addMin(user, min) {
   }
 }
 
-export function fetchDashboardMins(uid) {
+export function deleteMin(min) {
   return function(dispatch) {
-    dispatch(fetchingMins(true));
-
-    firebase.database().ref(`/minterest/users/${uid}/mins`).on('value', (snapshot) => {
-      dispatch(storeDashboardMins(snapshot.val()));
-      dispatch(fetchingMins(false));
-    }, (error) => {
-      dispatch(fetchingMins(false));
-      console.log('Error occured when dispatching dashboard min listener.')
-    });
+    firebase.database().ref(`/minterest/users/${min.uid}/mins`).update({[min.key]: null})
+      .catch((error) => console.log('Error occured when attempting to delete a Min.'))
   }
 }
 

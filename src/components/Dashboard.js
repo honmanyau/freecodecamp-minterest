@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
     let mins = null;
 
     if (!min.fetchingMins && min.dashboardMins) {
-      mins = Object.keys(min.dashboardMins).map((key) => <Min key={key} min={min.dashboardMins[key]} />);
+      mins = Object.keys(min.dashboardMins).map((key) => <Min key={key} min={{...min.dashboardMins[key], key}} />);
     }
 
     return(
