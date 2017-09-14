@@ -59,8 +59,11 @@ export function addMin(user, min) {
 
 export function deleteMin(min) {
   return function(dispatch) {
-    firebase.database().ref(`/minterest/users/${min.uid}/mins`).update({[min.key]: null})
-      .catch((error) => console.log('Error occured when attempting to delete a Min.'))
+    firebase.database().ref().update({
+      [`/minterest/users/${min.uid}/mins/${min.key}`]: null,
+      [`/minterest/public/mins/${min.mid + min.uid}`]: null
+    })
+      .catch((error) => console.log('Error occured when attempting to delete a Min.', error))
   }
 }
 

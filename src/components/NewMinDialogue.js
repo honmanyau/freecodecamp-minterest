@@ -44,7 +44,7 @@ class NewMinDialogue extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = initialState;
+    this.state = Object.assign({}, initialState);
   }
 
   handleNewMinButtonClick() {
@@ -58,9 +58,7 @@ class NewMinDialogue extends React.Component {
       description: this.state.description
     })
     this.closeModalWindow()
-    this.setState({
-
-    });
+    this.setState(Object.assign({}, initialState));
   }
 
   closeModalWindow() {
