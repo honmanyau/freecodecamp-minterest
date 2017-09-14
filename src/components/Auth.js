@@ -52,7 +52,8 @@ class Auth extends React.Component {
   }
 
   render() {
-    const localAuth = window.localStorage.getItem(LOCALSTORAGEKEY);
+    const localAuth = JSON.parse(window.localStorage.getItem(LOCALSTORAGEKEY));
+    console.log(localAuth.user.uid)
     const auth = this.props.auth;
     const iconElementRight =
       <FlatButton

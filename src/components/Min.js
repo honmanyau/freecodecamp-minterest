@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as MinActions from '../actions/min';
 import { ROOTURL, LOCALSTORAGEKEY } from '../common';
 
+import { pink300 } from 'material-ui/styles/colors';
 import { Card, CardActions, CardMedia, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -115,12 +116,16 @@ class Min extends React.Component {
           {
             localAuth ?
               (
-                <IconButton
-                  disabled={localAuth ? (localAuth.user.uid === min.uid ? true : false) : false}
-                  style={{...styles.iconButton, margin: '0 12px'}}
-                  iconStyle={styles.icon}
-                  iconClassName="fa fa-heart-o"
-                />
+                <span>
+                  <IconButton
+                    disabled={localAuth ? (localAuth.user.uid === min.uid ? true : false) : false}
+                    style={{...styles.iconButton, margin: '0 12px'}}
+                    iconStyle={min.liked ? (Object.keys(min.liked).indexOf(localAuth.user.uid) < 0 ? styles.icon : {...styles.icon, color: pink300}) : styles.icon}
+                    iconClassName={min.liked ? (Object.keys(min.liked).indexOf(localAuth.user.uid) < 0 ? 'fa fa-heart-o' : 'fa fa-heart') : 'fa fa-heart-o'}
+                    onClick={() => this.props.actions.likeMin(this.props.auth.user, min)}
+                  />
+                  {min.liked ? Object.keys(min.liked).length : 0}
+                </span>
               ) :
               null
           }
@@ -137,7 +142,7 @@ class Min extends React.Component {
           <div>{min.description}</div>
           <div style={styles.author}>Shared by {min.author}</div>
           {
-            localAuth ?
+            localAuth && localAuth.user.uid === min.uid ?
             (
               <div>
                 <br />
@@ -159,10 +164,16 @@ class Min extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(MinActions, dispatch)
   }
 }
 
-export default connect(null, mapDispatchToProps)(Min);
+export default connect(mapStateToProps, mapDispatchToProps)(Min);

@@ -64,6 +64,25 @@ export function deleteMin(min) {
   }
 }
 
+export function likeMin(user, min) {
+  return function(dispatch) {
+    let like = null;
+    // Additional check
+    if (!min.liked) {
+      like = true;
+    }
+    else if (Object.keys(min.liked).indexOf(user.uid) < 0) {
+      like = true;
+    }
+
+    firebase.database().ref().update({
+      [`/minterest/public/mins/${min.key}/liked/${user.uid}`]: like,
+      [`/minterest/users/${min.uid}/mins/${min.mid}/liked/${user.uid}`]: like
+    })
+      .catch((error) => console.log('Error occured while submitting a like.', error));
+  }
+}
+
 export function fetchingMins(fetchingMins) {
   return {
     type: FETCHING_MINS,
