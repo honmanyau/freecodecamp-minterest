@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import * as AuthActions from '../actions/auth';
 import { LOCALSTORAGEKEY, GITHUBREPOURL } from '../common';
@@ -54,6 +54,7 @@ class Auth extends React.Component {
   render() {
     const localAuth = JSON.parse(window.localStorage.getItem(LOCALSTORAGEKEY));
     const auth = this.props.auth;
+    const pathname = window.location.pathname;
     const iconElementRight =
       <FlatButton
         disabled={auth.inProgress ? true : false}
@@ -61,6 +62,10 @@ class Auth extends React.Component {
         label={auth.inProgress ? '｡◕‿◕｡✿' : (localAuth ? 'Sign out' : <span><i className="fa fa-twitter" aria-hidden="true"></i> Sign in</span>)}
         onClick={() => this.handleAuthButtonClick(localAuth)}
       />;
+
+    if (!localAuth && pathname === '/dashboard') {
+      return <Redirect to="/" />;
+    }
 
     return(
       <div>

@@ -30,20 +30,22 @@ class Mins extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      columns: Math.floor(window.innerWidth * 0.90 / (COLWIDTH + COLMARGIN * 2))
-    });
+    this.calculateColumns();
 
     window.addEventListener('resize', () => {
-      const width = window.innerWidth > MAXWIDTH ? MAXWIDTH : window.innerWidth;
-      const columns = Math.floor(width * 0.90 / (COLWIDTH + COLMARGIN * 2));
-
-      if (columns !== this.state.columns) {
-        this.setState({
-          columns: columns
-        });
-      }
+      this.calculateColumns();
     });
+  }
+
+  calculateColumns() {
+    const width = window.innerWidth > MAXWIDTH ? MAXWIDTH : window.innerWidth;
+    const columns = Math.floor(width * 0.90 / (COLWIDTH + COLMARGIN * 2));
+
+    if (columns !== this.state.columns) {
+      this.setState({
+        columns: columns
+      });
+    }
   }
 
   render() {
@@ -57,6 +59,7 @@ class Mins extends React.Component {
     }
 
     if (columns && mins) {
+      console.log(columns, mins)
       let columnedMins = [];
 
       for (let i = 0; i < columns; i++) {
